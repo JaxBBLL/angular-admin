@@ -8,6 +8,7 @@ const Proxy = require('gulp-connect-proxy');
 const stripDebug = require('gulp-strip-debug');
 const changed = require('gulp-changed');
 const less = require('gulp-less');
+const del = require('del');
 
 const watchDes = {
   root: './src',
@@ -46,6 +47,12 @@ gulp.task('watch', () => {
   gulp.watch(watchDes.less, ['less']);
 });
 
+gulp.task('clean:file', cb => {
+  del([
+    './dist/**/*'
+  ]);
+});
+
 gulp.task('copyJS', () =>
   gulp.src(['./src/**/*.js'])
   // .pipe(babel({
@@ -82,4 +89,4 @@ gulp.task('connect', () => {
 
 gulp.task('default', ['connect', 'less', 'watch']);
 
-gulp.task('prod', ['copyJS', 'copyHtml', 'copyCSS']);
+gulp.task('prod', ['less', 'copyJS', 'copyHtml', 'copyCSS']);
