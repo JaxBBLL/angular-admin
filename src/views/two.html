@@ -1,0 +1,9 @@
+<div>
+	<h1>two</h1>
+	<button onclick="jump()" class="layui-btn layui-btn-radius layui-btn-primary">跳转</button>
+</div>
+<script>
+  function jump() {
+  	$state.go('/one', {id: 1000})
+  }
+</script>
