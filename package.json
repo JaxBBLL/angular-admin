@@ -3,20 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
+  "author": "lsc",
+  "license": "ISC",
   "scripts": {
     "dev": "gulp",
     "prod": "gulp prod"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JaxBBLL/layui-spa.git"
-  },
-  "author": "lsc",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/JaxBBLL/layui-spa/issues"
-  },
-  "homepage": "https://github.com/JaxBBLL/layui-spa#readme",
   "devDependencies": {
     "babel-preset-es2015": "^6.18.0",
     "gulp": "^3.9.1",

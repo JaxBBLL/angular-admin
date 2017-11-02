@@ -8,7 +8,6 @@ development
 3. Run `npm run dev` or `gulp` start project
 3. Point your browser to [http://localhost:3000](http://localhost:3000)
 
------------------------------------------------
 
 production
 ----------
