@@ -1,4 +1,4 @@
-# this is a spa
+# this is a spa with layui
 
 development
 -----------
