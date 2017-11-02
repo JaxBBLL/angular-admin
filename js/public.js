@@ -1,5 +1,5 @@
-!(function(window, document, $, undefined) {
-  var map = [{
+!(function(window, document, undefined) {
+  var routerMap = [{
     path: '/one',
     page: '/views/one.html',
     title: '第一个页面',
@@ -16,31 +16,27 @@
     parent: '设置'
   }]
 
-  var routes = {};
-  for (var i = 0; i < map.length; i++) {
-    routes[map[i].path] = renderComponent(map[i].page, map[i].title);
+  var routeData = {};
+  for (var i = 0; i < routerMap.length; i++) {
+    routeData[routerMap[i].path] = renderPage(routerMap[i].page, routerMap[i].title);
   }
-  var router = Router(routes).configure({
+  $router = Router(routeData).configure({
     before: function() {
-      console.log('router', router)
-      console.log('before', arguments)
+      console.log('$router', $router)
     },
     notfound: function() {
       console.log('notfound')
     }
   });
-  // var router = Router(routes);
-  router.init(); //初始化
+  $router.init(); //初始化
 
-  
-  //	路由更改渲染对应的页面
-  function renderComponent(page, title) {
+
+  //  路由更改渲染对应的页面
+  function renderPage(page, title) {
     return function() {
-    	var hash = window.location
-    	console.log('hash', router);
-    	document.title = title;
-    	$('#router-view').load(page + '?v=' + new Date().getTime()) 
+      document.title = title;
+      $('#router-view').load(page + '?v=' + new Date().getTime())
     }
   }
 
-})(window, document, layui.jquery)
+})(window, document)
