@@ -7,13 +7,65 @@ const cleanCSS = require('gulp-clean-css');
 const Proxy = require('gulp-connect-proxy');
 const stripDebug = require('gulp-strip-debug');
 const changed = require('gulp-changed');
+const less = require('gulp-less');
 
 const watchDes = {
+  root: './src',
   html: './src/**/*.html',
   js: './src/**/*.js',
-  css: './src/**/*.css'
+  css: './src/**/*.css',
+  less: './src/**/*.less'
 }
 const DES = 'dist';
+
+gulp.task('html', () => {
+  gulp.src(watchDes.html)
+    .pipe(connect.reload());
+});
+
+gulp.task('js', () => {
+  gulp.src(watchDes.js)
+    .pipe(connect.reload());
+});
+
+gulp.task('css', () => {
+  return gulp.src(watchDes.css)
+    .pipe(connect.reload());
+});
+
+gulp.task('less', () => {
+  gulp.src(watchDes.less)
+    .pipe(less())
+    .pipe(gulp.dest(watchDes.root));
+});
+
+gulp.task('watch', () => {
+  gulp.watch(watchDes.html, ['html']);
+  gulp.watch(watchDes.js, ['js']);
+  gulp.watch(watchDes.css, ['css']);
+  gulp.watch(watchDes.less, ['less']);
+});
+
+gulp.task('copyJS', () =>
+  gulp.src(['./src/**/*.js'])
+  // .pipe(babel({
+  //   presets: ['es2015']
+  // }))
+  .pipe(uglify())
+  .pipe(stripDebug())
+  .pipe(gulp.dest(DES))
+);
+
+gulp.task('copyCSS', () =>
+  gulp.src(['./src/**/*.css'])
+  .pipe(cleanCSS('style.css'))
+  .pipe(gulp.dest(DES))
+);
+
+gulp.task('copyHtml', () =>
+  gulp.src('./src/**/*.html')
+  .pipe(gulp.dest(DES))
+);
 
 gulp.task('connect', () => {
   connect.server({
@@ -28,43 +80,6 @@ gulp.task('connect', () => {
   });
 });
 
-gulp.task('html', () => {
-  gulp.src(watchDes.html)
-    .pipe(connect.reload());
-});
+gulp.task('default', ['connect', 'less', 'watch']);
 
-gulp.task('js', () => {
-  gulp.src(watchDes.js)
-    .pipe(connect.reload());
-});
-
-gulp.task('css', () => {
-  gulp.src(watchDes.css)
-    .pipe(connect.reload());
-});
-
-gulp.task('watch', () => {
-  gulp.watch([watchDes.html, watchDes.js, watchDes.css], ['html', 'js']);
-});
-
-gulp.task('copyJS', () =>
-  gulp.src('./src/**/*.js')
-  .pipe(uglify())
-  .pipe(stripDebug())
-  .pipe(gulp.dest(DES))
-);
-
-gulp.task('copyCSS', () =>
-  gulp.src('./src/**/*.css')
-  .pipe(cleanCSS('style.css'))
-  .pipe(gulp.dest(DES))
-);
-
-gulp.task('copyHtml', () =>
-  gulp.src('./src/**/*.html')
-  .pipe(gulp.dest(DES))
-);
-
-gulp.task('default', ['connect', 'watch']);
-
-gulp.task('prod', ['copyJS','copyHtml','copyCSS']);
+gulp.task('prod', ['copyJS', 'copyHtml', 'copyCSS']);
