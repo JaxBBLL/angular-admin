@@ -1,13 +1,13 @@
 const gulp = require('gulp');
 const connect = require('gulp-connect');
 const uglify = require('gulp-uglify');
-const fs = require('fs');
 const babel = require('gulp-babel');
 const cleanCSS = require('gulp-clean-css');
 const Proxy = require('gulp-connect-proxy');
 const stripDebug = require('gulp-strip-debug');
 const less = require('gulp-less');
-var clean = require('gulp-clean');
+const clean = require('gulp-clean');
+const fs = require('fs');
 
 const watchDes = {
   root: './src',
@@ -17,9 +17,8 @@ const watchDes = {
   less: './src/**/*.less'
 }
 const DES = 'dist';
-const config = DES.clean;
 
-gulp.task("clean", function() {
+gulp.task("clean", () => {
   return gulp.src(DES)
     .pipe(clean());
 })
