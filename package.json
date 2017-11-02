@@ -2,7 +2,7 @@
   "name": "layui-spa",
   "version": "1.0.0",
   "description": "",
-  "main": "gulpfile.js",
+  "main": "",
   "author": "lsc",
   "license": "ISC",
   "scripts": {
