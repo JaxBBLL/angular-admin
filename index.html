@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>layui spa</title>
+  <link rel="stylesheet" href="./css/layui.css">
+  <script src="./plugin/polyfill.min.js"></script>
+  <script src="./plugin/director.min.js"></script>
+  <script src="./plugin/layui.all.js"></script>
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+  <!--[if lt IE 9]>
+  <script src="./plugin/html5.min.js"></script>
+  <script src="./plugin/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <div style="float: left;">
+    <ul class="layui-nav layui-nav-tree">
+      <li class="layui-nav-item layui-nav-itemed">
+        <a href="#/one">one</a>
+        <a href="#/two">two</a>
+        <a href="#/three">three</a>
+      </li>
+    </ul>
+  </div>
+  <div style="padding-left:200px; ">
+    <div id="router-view" style="padding:20px;">
+      test
+    </div>
+  </div>
+  <script src="./js/public.js"></script>
+</body>
+
+</html>
