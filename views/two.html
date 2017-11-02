@@ -1,16 +1,9 @@
 <div>
 	<h1>two</h1>
-	<button onclick="jump()">跳转</button>
+	<button onclick="jump()" class="layui-btn layui-btn-radius layui-btn-primary">跳转</button>
 </div>
 <script>
-  
-  var r = $router.getRoute().length && $router.getRoute()[0]
-  console.log(r)
   function jump() {
-  	// router.path('/one', function() {
-  	// 	console.log('go to one')
-  	// })
-  	// $router.setRoute('/one?id=000')
   	$state.go('/one', {id: 1000})
   }
 </script>

@@ -4,7 +4,7 @@
 
 var $router, //	路由实例对象
   $ = layui.$, //	JQuery
-  $state; // 	添加的路由方法对象
+  $state; // 	补充的路由方法对象
 
 $state = {
   //	获取当前路由地址
