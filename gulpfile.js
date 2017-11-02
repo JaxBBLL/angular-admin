@@ -6,9 +6,8 @@ const babel = require('gulp-babel');
 const cleanCSS = require('gulp-clean-css');
 const Proxy = require('gulp-connect-proxy');
 const stripDebug = require('gulp-strip-debug');
-const changed = require('gulp-changed');
 const less = require('gulp-less');
-const del = require('del');
+var clean = require('gulp-clean');
 
 const watchDes = {
   root: './src',
@@ -18,6 +17,12 @@ const watchDes = {
   less: './src/**/*.less'
 }
 const DES = 'dist';
+const config = DES.clean;
+
+gulp.task("clean", function() {
+  return gulp.src(DES)
+    .pipe(clean());
+})
 
 gulp.task('html', () => {
   gulp.src(watchDes.html)
@@ -45,12 +50,6 @@ gulp.task('watch', () => {
   gulp.watch(watchDes.js, ['js']);
   gulp.watch(watchDes.css, ['css']);
   gulp.watch(watchDes.less, ['less']);
-});
-
-gulp.task('clean:file', cb => {
-  del([
-    './dist/**/*'
-  ]);
 });
 
 gulp.task('copyJS', () =>
@@ -89,4 +88,6 @@ gulp.task('connect', () => {
 
 gulp.task('default', ['connect', 'less', 'watch']);
 
-gulp.task('prod', ['less', 'copyJS', 'copyHtml', 'copyCSS']);
+gulp.task('prod', ['clean'], () => {
+  gulp.start('less', 'copyJS', 'copyHtml', 'copyCSS');
+});
