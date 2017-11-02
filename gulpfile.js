@@ -67,4 +67,4 @@ gulp.task('copyHtml', () =>
 
 gulp.task('default', ['connect', 'watch']);
 
-gulp.task('pro', ['copyJS','copyHtml','copyCSS']);
+gulp.task('prod', ['copyJS','copyHtml','copyCSS']);
