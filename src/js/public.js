@@ -1,46 +1,7 @@
 ;
 !(function(window, document, undefined) {
-  var menus = {
-    'default': [{
-      path: '/one',
-      title: '第一个页面'
-    }, {
-      path: '/two',
-      title: '第二个页面'
-    }, {
-      path: '/three',
-      title: '第三个页面'
-    }],
-    'user': [{
-      path: '/one',
-      title: '第一个页面'
-    }, {
-      path: '/two',
-      title: '第二个页面'
-    }]
-  }
-  var routerMap = [{
-    path: '/one',
-    page: '/views/one.html',
-    title: '第一个页面',
-    parent: '设置'
-  }, {
-    path: '/two',
-    page: '/views/two.html',
-    title: '第二个页面',
-    parent: '设置',
-    menu: 'user'
-  }, {
-    path: '/three',
-    page: '/views/three.html',
-    title: '第三个页面',
-    parent: '设置'
-  }, {
-    path: '/404',
-    page: '/views/404.html',
-    title: '404',
-    parent: '设置'
-  }]
+  var menus = $menus;
+  var routerMap = $routerMap;
 
   var routeData = routeSet(routerMap);
 
