@@ -11,6 +11,7 @@ const runSequence = require('run-sequence');
 const rev = require('gulp-rev');
 const revCollector = require('gulp-rev-collector');
 const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
 
 //定义css、js源文件路径
 const source = {
@@ -18,7 +19,8 @@ const source = {
     html: './src/**/*.html',
     js: './src/**/*.js',
     css: './src/**/*.css',
-    plugin: './src/plugin/**/*.*'
+    plugin: './src/plugin/**/*.*',
+    config: './src/config/*.js'
   }
   // 需编译处理的路径
 const cssSrc = './src/css/**/*.css';
@@ -59,21 +61,27 @@ gulp.task('less', () => {
     // .pipe(sourcemaps.write())
     .pipe(gulp.dest('src/css'));
 });
-// js压缩，排除plugin目录
+
+gulp.task('config', () => {
+    gulp.src(['./src/config/var.js', './src/config/!(init).js', './src/config/init.js'])
+      .pipe(concat('style.js'))
+      .pipe(gulp.dest('./src/js'))
+  })
+  // js压缩，排除plugin目录
 gulp.task('JS:prod', () =>
-  gulp.src([source.js, '!' + source.plugin])
+  gulp.src([jsSrc])
   // .pipe(babel({
   //   presets: ['es2015']
   // }))
   .pipe(uglify())
   .pipe(stripDebug())
-  .pipe(gulp.dest(DES))
+  .pipe(gulp.dest(DES_JS))
 );
 
 gulp.task('CSS:prod', () =>
-  gulp.src([source.css, '!' + source.plugin])
+  gulp.src([cssSrc])
   .pipe(cleanCSS())
-  .pipe(gulp.dest(DES))
+  .pipe(gulp.dest(DES_CSS))
 );
 
 gulp.task('plugin:prod', () =>
@@ -129,12 +137,14 @@ gulp.task('watch', () => {
   gulp.watch(source.js, ['js']);
   gulp.watch(source.css, ['css']);
   gulp.watch(source.less, ['less']);
+  gulp.watch(source.config, ['config']);
 });
 
-gulp.task('dev', ['less', 'connect', 'watch']);
+gulp.task('dev', ['config', 'less', 'connect', 'watch']);
 
-gulp.task('prod', ['clean', 'less'], () => {
-  gulp.start('CSS:prod', 'JS:prod', 'html:prod', 'plugin:prod');
+//  发布前先清空dist目录和less编译，然后压缩文件并copy至dist目录
+gulp.task('prod', ['clean', 'less', 'config'], () => {
+  gulp.start('html:prod', 'CSS:prod', 'JS:prod', 'plugin:prod');
 });
 
 gulp.task('default', ['dev']);

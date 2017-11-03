@@ -1,14 +1,13 @@
 ;
 !(function(window, document, undefined) {
-  var menus = $menus;
-  var routerMap = $routerMap;
+  var menus = window.$config.menus;
+  var routerMap = window.$config.routers;
 
   var routeData = routeSet(routerMap);
 
-
-  $router = Router(routeData).configure({
+  var router = Router(routeData).configure({
     before: function() {
-      console.log('before...',$router.getRoute())
+      console.log('before...', router.getRoute())
     },
     after: function() {
       // console.log('after...')
@@ -18,7 +17,7 @@
       $state.go('/404')
     }
   });
-  $router.init(); //初始化
+  router.init(); //初始化
 
   //  处理路由初始化的数据
   function routeSet(routerMap) {
@@ -41,7 +40,7 @@
     return function() {
       console.log('on...')
       document.title = title;
-      $('#router-view').load(page + '?v=' + $v)
+      $('#router-view').load(page + '?v=' + window.$config.v)
       $('#app-menu a').removeClass('router-active')
       $('#app-menu a[href="#' + path + '"]').addClass('router-active')
     }
@@ -68,5 +67,5 @@
       $('#app-menu').data('menu', name)
     }
   }
-
+  window.$config.router = router;
 })(window, document)
