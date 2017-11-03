@@ -6,7 +6,8 @@ var $router, // 路由实例对象
   $ = layui.$, // JQuery
   $menus, //  所有的菜单
   $routerMap, //  所有的路由
-  $state; //  补充的路由方法对象
+  $state, //  补充的路由方法对象
+  $v = '1.0.0'; //  资源文件发布的版本
 
 $state = {
   //  获取当前路由地址
@@ -43,14 +44,14 @@ $state = {
 
 $menus = {
   'default': [{
-    path: '/one',
-    title: '第一个页面'
+    path: '/user/list',
+    title: '列表'
   }, {
-    path: '/two',
-    title: '第二个页面'
+    path: '/user/update',
+    title: '修改'
   }, {
-    path: '/three',
-    title: '第三个页面'
+    path: '/user/add',
+    title: '添加'
   }],
   'user': [{
     path: '/one',
@@ -62,20 +63,23 @@ $menus = {
 }
 
 $routerMap = [{
-  path: '/one',
+  path: '/home',
+  page: '/views/home.html',
+  title: '主页'
+}, {
+  path: '/user/list',
   page: '/views/user/list.html',
-  title: '第一个页面',
+  title: '列表',
   parent: '设置'
 }, {
-  path: '/two',
-  page: '/views/two.html',
-  title: '第二个页面',
-  parent: '设置',
-  menu: 'user'
+  path: '/user/update',
+  page: '/views/user/update.html',
+  title: '修改',
+  parent: '设置'
 }, {
-  path: '/three',
-  page: '/views/three.html',
-  title: '第三个页面',
+  path: '/user/add',
+  page: '/views/user/add.html',
+  title: '添加',
   parent: '设置'
 }, {
   path: '/404',

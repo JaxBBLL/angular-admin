@@ -41,7 +41,7 @@
     return function() {
       console.log('on...')
       document.title = title;
-      $('#router-view').load(page + '?v=' + new Date().getTime())
+      $('#router-view').load(page + '?v=' + $v)
       $('#app-menu a').removeClass('router-active')
       $('#app-menu a[href="#' + path + '"]').addClass('router-active')
     }

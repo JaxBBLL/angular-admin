@@ -1,5 +1,26 @@
 <link rel="stylesheet" href="./css/user/list.css">
-<div class="page">
-	this is user list page
+<script id="test-hbs" type="text/handlebars-template">
+  {{#each this}}
+  <div class="car-box">
+    <div class="order">{{chinese @index}}</div>
+    <div>姓名：{{name}}</div>
+    {{#if age}}
+    <div>年龄：{{age}}</div>
+    {{/if}}
+    <div>地址：{{address}}</div>
+    <ul>
+      {{!-- {{#with books}} {{#each this}}
+      <li>书籍:{{this}}</li>
+      {{/each}} {{/with}} --}} {{#each books}}
+      <li {{#isfirst @index}} style="color: red;" {{/isfirst}} {{#if ../blue}} style="color:blue;" {{/if}}>
+        书籍:{{addone @../index}}-{{addone @index}}{{this}}
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+  {{/each}}
+</script>
+<div class="hbs-exemple" id="hbs-exemple">
+  1.hbs模板使用 2.hbs模板循环输出 3.each，with，if，注释 4.功能需求： a.给每个卡片添加序号(中文） b.
 </div>
 <script src="./js/user/list.js"></script>
