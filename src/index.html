@@ -11,7 +11,7 @@
   <script src="./plugin/polyfill.min.js"></script>
   <script src="./plugin/director.js"></script>
   <script src="./plugin/layui/layui.all.js"></script>
-  <script type="text/javascript" src="./plugin/handlebars.js"></script> 
+  <script src="./plugin/handlebars.js"></script>
   <script src="./js/global.js"></script>
   <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
   <!--[if lt IE 9]>
@@ -24,12 +24,12 @@
   <div style="float: left;">
     <ul class="layui-nav layui-nav-tree">
       <li class="layui-nav-item layui-nav-itemed" id="app-menu" data-menu="">
-        <a href="#/one">one</a>
+       <!--  <a href="#/one">one</a>
         <a href="#/two">two</a>
-        <a href="#/three">three</a>
+        <a href="#/three">three</a> -->
       </li>
     </ul>
- <!--    <ul class="layui-nav layui-nav-tree" id="app-menu">
+    <!--    <ul class="layui-nav layui-nav-tree" id="app-menu">
       <li class="layui-nav-item layui-nav-itemed">
         <a href="javascript:;">默认展开</a>
         <dl class="layui-nav-child">
@@ -57,7 +57,9 @@
   </div>
   <script src="./js/public.js"></script>
   <script>
-    $state.go('/user/list')
+  if ($state.path() === '') {
+    $state.go('/home')
+  }
   </script>
 </body>
 

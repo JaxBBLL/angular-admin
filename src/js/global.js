@@ -12,12 +12,12 @@ var $router, // 路由实例对象
 $state = {
   //  获取当前路由地址
   path: function() {
-    var str = $router.getRoute().length && $router.getRoute()[0];
+    var str = $router.getRoute().join('/');
     return str.split('?')[0];
   },
   // 获取路由的参数
   query: function() {
-    var str = $router.getRoute().length && $router.getRoute()[0];
+    var str = $router.getRoute().join('/');
     str = str.split('?')[1] || ''; // 如果没有参数返回空字符
     var arr = str.split('&'); //  得到key，value值对应的数组
     var query = {};

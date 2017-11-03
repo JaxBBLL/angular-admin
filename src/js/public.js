@@ -8,10 +8,10 @@
 
   $router = Router(routeData).configure({
     before: function() {
-      console.log('before...')
+      console.log('before...',$router.getRoute())
     },
     after: function() {
-      console.log('after...')
+      // console.log('after...')
     },
     notfound: function() {
       console.log('notfound')
