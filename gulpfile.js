@@ -39,12 +39,12 @@ gulp.task("clean", () => {
 })
 
 gulp.task('html', () => {
-  gulp.src(source.html)
+  return gulp.src(source.html)
     .pipe(connect.reload());
 });
 
 gulp.task('js', () => {
-  gulp.src(source.js)
+  return gulp.src(source.js)
     .pipe(connect.reload());
 });
 
@@ -55,11 +55,11 @@ gulp.task('css', () => {
 
 // less编译
 gulp.task('less', () => {
-  gulp.src(lessSrc)
+  return gulp.src(lessSrc)
     // .pipe(sourcemaps.init())
     .pipe(less())
     // .pipe(sourcemaps.write())
-    .pipe(gulp.dest('src/css'));
+    .pipe(gulp.dest('./src/css'));
 });
 
 gulp.task('config', () => {
@@ -67,7 +67,7 @@ gulp.task('config', () => {
       .pipe(concat('style.js'))
       .pipe(gulp.dest('./src/js'))
   })
-  // js压缩，排除plugin目录
+  // js压缩并发布
 gulp.task('JS:prod', () =>
   gulp.src([jsSrc])
   // .pipe(babel({
@@ -94,7 +94,7 @@ gulp.task('revCss', () => {
   return gulp.src(cssSrc)
     .pipe(rev())
     .pipe(rev.manifest())
-    .pipe(gulp.dest('rev/css'));
+    .pipe(gulp.dest('./rev/css'));
 });
 
 //js生成文件hash编码并生成 rev-manifest.json文件名对照映射
@@ -102,7 +102,7 @@ gulp.task('revJs', () => {
   return gulp.src(jsSrc)
     .pipe(rev())
     .pipe(rev.manifest())
-    .pipe(gulp.dest('rev/js'));
+    .pipe(gulp.dest('./rev/js'));
 });
 
 //Html替换css、js文件版本
