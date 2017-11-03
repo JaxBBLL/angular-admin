@@ -112,9 +112,9 @@ gulp.task('revJs', () => {
 
 //Html替换css、js文件版本
 gulp.task('revHtml', () => {
-  return gulp.src(['rev/**/*.json', 'src/views/**/*.html'])
+  return gulp.src(['rev/**/*.json', 'src/**/*.html'])
     .pipe(revCollector())
-    .pipe(gulp.dest(DES_HTML));
+    .pipe(gulp.dest(DES));
 });
 
 //html发布
