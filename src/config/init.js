@@ -1,19 +1,16 @@
 ;
-!(function(window, document, undefined) {
+(function(window, document, undefined) {
   var menus = window.$config.menus;
   var routerMap = window.$config.routers;
 
   var routeData = routeSet(routerMap);
 
   var router = Router(routeData).configure({
-    before: function() {
-      console.log('before...', router.getRoute())
-    },
+    before: function() {},
     after: function() {
       // console.log('after...')
     },
     notfound: function() {
-      console.log('notfound')
       $state.go('/404')
     }
   });
@@ -38,7 +35,6 @@
   //  路由更改渲染对应的页面
   function renderPage(page, title, path) {
     return function() {
-      console.log('on...')
       document.title = title;
       $('#router-view').load(page + '?v=' + window.$config.v)
       $('#app-menu a').removeClass('router-active')
@@ -55,14 +51,21 @@
       var menu = menus[name];
       var html = '';
       $.each(menu, function(i, item) {
-        var h;
-        if (item.path === path) {
-          h = '<a href="#' + item.path + '" class="router-active">' + item.title + '</a>'
-        } else {
-          h = '<a href="#' + item.path + '">' + item.title + '</a>'
-        }
-        html += h;
+        var li = '',
+          dd = '';
+        $.each(item.children, function(k, cur) {
+          if (cur.path === path) {
+            dd += '<dd><a href="#' + cur.path + '" class="router-active">' + cur.title + '</a></dd>'
+          } else {
+            dd += '<dd><a href="#' + cur.path + '">' + cur.title + '</a></dd>';
+          }
+        })
+        li = '<li class="layui-nav-item layui-nav-itemed">' +
+          '<a href="javascript:;">' + item.title + '</a>' +
+          '<dl class="layui-nav-child">' + dd + '</dl></li>';
+        html += li;
       })
+      console.log('html', html)
       $('#app-menu').html(html)
       $('#app-menu').data('menu', name)
     }

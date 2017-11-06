@@ -8,31 +8,24 @@ window.$ = layui.$; // JQuery
 
 
 ;
-!(function(window, document, undefined) {
+(function(window) {
   var menus = {
     'default': [{
-      path: '/user/list',
-      title: '列表'
-    }, {
-      path: '/user/update',
-      title: '修改'
-    }, {
-      path: '/user/add',
-      title: '添加'
-    }],
-    'user': [{
-      path: '/one',
-      title: '第一个页面'
-    }, {
-      path: '/two',
-      title: '第二个页面'
+      title: '任务管理',
+      children: [{
+        path: '/user/add',
+        title: '任务发布'
+      }, {
+        path: '/user/list',
+        title: '任务管理'
+      }]
     }]
   }
   window.$config.menus = menus;
-})(window, document)
+})(window)
 
 ;
-!(function(window, document, undefined) {
+(function(window, document, undefined) {
   var state = {
     //  获取当前路由地址
     path: function() {
@@ -71,20 +64,15 @@ window.$ = layui.$; // JQuery
 
 
 ;
-!(function(window, document, undefined) {
+(function(window) {
   var routers = [{
     path: '/home',
     page: '/views/home.html',
     title: '主页'
   }, {
-    path: '/user/list',
-    page: '/views/user/list.html',
-    title: '列表',
-    parent: '设置'
-  }, {
-    path: '/user/update',
-    page: '/views/user/update.html',
-    title: '修改',
+    path: '/404',
+    page: '/views/404.html',
+    title: '404',
     parent: '设置'
   }, {
     path: '/user/add',
@@ -92,30 +80,27 @@ window.$ = layui.$; // JQuery
     title: '添加',
     parent: '设置'
   }, {
-    path: '/404',
-    page: '/views/404.html',
-    title: '404',
+    path: '/user/list',
+    page: '/views/user/list.html',
+    title: '列表',
     parent: '设置'
   }]
   window.$config.routers = routers;
-})(window, document)
+})(window)
 
 ;
-!(function(window, document, undefined) {
+(function(window, document, undefined) {
   var menus = window.$config.menus;
   var routerMap = window.$config.routers;
 
   var routeData = routeSet(routerMap);
 
   var router = Router(routeData).configure({
-    before: function() {
-      console.log('before...', router.getRoute())
-    },
+    before: function() {},
     after: function() {
       // console.log('after...')
     },
     notfound: function() {
-      console.log('notfound')
       $state.go('/404')
     }
   });
@@ -140,7 +125,6 @@ window.$ = layui.$; // JQuery
   //  路由更改渲染对应的页面
   function renderPage(page, title, path) {
     return function() {
-      console.log('on...')
       document.title = title;
       $('#router-view').load(page + '?v=' + window.$config.v)
       $('#app-menu a').removeClass('router-active')
@@ -157,14 +141,21 @@ window.$ = layui.$; // JQuery
       var menu = menus[name];
       var html = '';
       $.each(menu, function(i, item) {
-        var h;
-        if (item.path === path) {
-          h = '<a href="#' + item.path + '" class="router-active">' + item.title + '</a>'
-        } else {
-          h = '<a href="#' + item.path + '">' + item.title + '</a>'
-        }
-        html += h;
+        var li = '',
+          dd = '';
+        $.each(item.children, function(k, cur) {
+          if (cur.path === path) {
+            dd += '<dd><a href="#' + cur.path + '" class="router-active">' + cur.title + '</a></dd>'
+          } else {
+            dd += '<dd><a href="#' + cur.path + '">' + cur.title + '</a></dd>';
+          }
+        })
+        li = '<li class="layui-nav-item layui-nav-itemed">' +
+          '<a href="javascript:;">' + item.title + '</a>' +
+          '<dl class="layui-nav-child">' + dd + '</dl></li>';
+        html += li;
       })
+      console.log('html', html)
       $('#app-menu').html(html)
       $('#app-menu').data('menu', name)
     }

@@ -1,23 +1,16 @@
 ;
-!(function(window, document, undefined) {
+(function(window) {
   var menus = {
     'default': [{
-      path: '/user/list',
-      title: '列表'
-    }, {
-      path: '/user/update',
-      title: '修改'
-    }, {
-      path: '/user/add',
-      title: '添加'
-    }],
-    'user': [{
-      path: '/one',
-      title: '第一个页面'
-    }, {
-      path: '/two',
-      title: '第二个页面'
+      title: '任务管理',
+      children: [{
+        path: '/user/add',
+        title: '任务发布'
+      }, {
+        path: '/user/list',
+        title: '任务管理'
+      }]
     }]
   }
   window.$config.menus = menus;
-})(window, document)
+})(window)

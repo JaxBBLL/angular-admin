@@ -1,5 +1,5 @@
 ;
-!(function(window, document, undefined) {
+(function(window, document, undefined) {
   var state = {
     //  获取当前路由地址
     path: function() {

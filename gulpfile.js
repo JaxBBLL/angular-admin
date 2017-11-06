@@ -136,7 +136,7 @@ gulp.task('watch', () => {
   gulp.watch(source.html, ['html']);
   gulp.watch(source.js, ['js']);
   gulp.watch(source.css, ['css']);
-  gulp.watch(source.less, ['less']);
+  gulp.watch(lessSrc, ['less']);
   gulp.watch(source.config, ['config']);
 });
 
