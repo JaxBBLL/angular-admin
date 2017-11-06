@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>layui spa</title>
   <link rel="stylesheet" href="./plugin/layui/css/layui.css">
-  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/layui.reset.css">
   <script src="./plugin/polyfill.min.js"></script>
   <script src="./plugin/director.js"></script>
   <script src="./plugin/layui/layui.all.js"></script>
@@ -20,40 +21,43 @@
 </head>
 
 <body>
-  <div style="float: left;">
-   <!--  <ul class="layui-nav layui-nav-tree">
-      <li class="layui-nav-item layui-nav-itemed" id="app-menu" data-menu="">
-       
-      </li>
-    </ul> -->
-    <ul class="layui-nav layui-nav-tree" id="app-menu" data-menu="">
-      <li class="layui-nav-item layui-nav-itemed">
-        <a href="javascript:;">任务管理</a>
-        <dl class="layui-nav-child">
-          <dd><a href="#/user/add">发布任务</a></dd>
-          <dd><a href="#/user/list">任务列表</a></dd>
-        </dl>
-      </li>
-      <li class="layui-nav-item layui-nav-itemed">
-        <a href="javascript:;">工单</a>
-        <dl class="layui-nav-child">
-          <dd><a href="#/user/add">发布工单</a></dd>
-          <dd><a href="#/user/list">工单列表</a></dd>
-        </dl>
-      </li>
-    </ul>
-  </div>
-  <div style="padding-left:200px; ">
-    <div id="router-view" style="padding:20px;">
-      test
+  <!-- <div id="app-header">
+    header
+  </div> -->
+  <div id="app-body">
+    <div style="float: left;">
+      <ul class="layui-nav layui-nav-tree" id="app-menu" data-menu="">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="javascript:;">任务管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="#/user/add">发布任务</a></dd>
+            <dd><a href="#/user/list">任务列表</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="javascript:;">工单</a>
+          <dl class="layui-nav-child">
+            <dd><a href="#/user/add">发布工单</a></dd>
+            <dd><a href="#/user/list">工单列表</a></dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+    <div style="overflow: hidden;">
+      <div id="router-view" style="padding:20px;">
+      </div>
     </div>
   </div>
-  <script src="./js/style.js"></script>
+  <div id="app-footer" class="clearfix">
+    <b>footer</b>
+  </div>
+  
+</body>
+<script src="./js/style.js"></script>
   <script>
   if ($state.path() === '') {
     $state.go('/home')
   }
   </script>
-</body>
 
 </html>

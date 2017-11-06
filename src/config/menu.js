@@ -9,6 +9,21 @@
       }, {
         path: '/user/list',
         title: '任务管理'
+      }, {
+        path: '/user/list',
+        title: '任务管理'
+      }, {
+        path: '/user/list',
+        title: '任务管理'
+      }, {
+        path: '/user/list',
+        title: '任务管理'
+      }, {
+        path: '/user/list',
+        title: '任务管理'
+      }, {
+        path: '/user/list',
+        title: '任务管理'
       }]
     }]
   }

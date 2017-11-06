@@ -18,6 +18,21 @@ window.$ = layui.$; // JQuery
       }, {
         path: '/user/list',
         title: '任务管理'
+      }, {
+        path: '/user/list',
+        title: '任务管理'
+      }, {
+        path: '/user/list',
+        title: '任务管理'
+      }, {
+        path: '/user/list',
+        title: '任务管理'
+      }, {
+        path: '/user/list',
+        title: '任务管理'
+      }, {
+        path: '/user/list',
+        title: '任务管理'
       }]
     }]
   }
@@ -145,17 +160,16 @@ window.$ = layui.$; // JQuery
           dd = '';
         $.each(item.children, function(k, cur) {
           if (cur.path === path) {
-            dd += '<dd><a href="#' + cur.path + '" class="router-active">' + cur.title + '</a></dd>'
+            dd += '<dd><a href="#' + cur.path + '" class="router-active" style="padding-left:40px;">' + cur.title + '</a></dd>'
           } else {
-            dd += '<dd><a href="#' + cur.path + '">' + cur.title + '</a></dd>';
+            dd += '<dd><a href="#' + cur.path + '" style="padding-left:40px;">' + cur.title + '</a></dd>';
           }
         })
         li = '<li class="layui-nav-item layui-nav-itemed">' +
-          '<a href="javascript:;">' + item.title + '</a>' +
+          '<a href="javascript:;" style="cursor:default"><i class="layui-icon">&#xe609;</i> ' + item.title + '</a>' +
           '<dl class="layui-nav-child">' + dd + '</dl></li>';
         html += li;
       })
-      console.log('html', html)
       $('#app-menu').html(html)
       $('#app-menu').data('menu', name)
     }

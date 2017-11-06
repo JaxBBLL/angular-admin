@@ -12,6 +12,7 @@ const rev = require('gulp-rev');
 const revCollector = require('gulp-rev-collector');
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
+const plumber = require('gulp-plumber');
 
 //定义css、js源文件路径
 const source = {
@@ -57,6 +58,7 @@ gulp.task('css', () => {
 gulp.task('less', () => {
   return gulp.src(lessSrc)
     // .pipe(sourcemaps.init())
+    .pipe(plumber()) // 防止报错中断task
     .pipe(less())
     // .pipe(sourcemaps.write())
     .pipe(gulp.dest('./src/css'));
