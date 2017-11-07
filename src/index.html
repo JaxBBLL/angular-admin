@@ -44,8 +44,7 @@
       </ul>
     </div>
     <div style="overflow: hidden;">
-      <div id="router-view" style="padding:20px;">
-      </div>
+      <div id="router-view" style="padding:20px;"></div>
     </div>
   </div>
   <div id="app-footer" class="clearfix">
@@ -54,10 +53,9 @@
   
 </body>
 <script src="./js/style.js"></script>
-  <script>
-  if ($state.path() === '') {
-    $state.go('/home')
-  }
-  </script>
-
+<script>
+if ($state.path() === '') {
+  $state.go('/home')
+}
+</script>
 </html>
