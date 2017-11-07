@@ -125,7 +125,10 @@ window.$ = layui.$; // JQuery
   function renderPage(page, title, path) {
     return function() {
       document.title = title;
-      $('#router-view').load(page + '?v=' + window.$config.v)
+      $('#router-view').load(page + '?v=' + window.$config.v, function() {
+        console.log('path', path)
+        loadScript('/js'+ path+".js");
+      })
       $('#app-menu a').removeClass('router-active')
       $('#app-menu a[href="#' + path + '"]').addClass('router-active')
     }
@@ -157,6 +160,21 @@ window.$ = layui.$; // JQuery
       $('#app-menu').html(html)
       $('#app-menu').data('menu', name)
     }
+  }
+
+  function loadScript(url, callback) {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    console.log(script.attributes);
+    if (callback)
+      script.onload = script.onreadystatechange = function() {
+        if (script.readyState && script.readyState != 'loaded' && script.readyState != 'complete')
+          return;
+        script.onreadystatechange = script.onload = null;
+        callback();
+      };
+    script.src = url + '?v=' + window.$config.v;
+    document.getElementsByTagName('head')[0].appendChild(script);
   }
   window.$config.router = router;
 })(window, document)
