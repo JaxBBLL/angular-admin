@@ -13,6 +13,7 @@ const revCollector = require('gulp-rev-collector');
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const plumber = require('gulp-plumber');
+const autoprefixer = require('gulp-autoprefixer');
 
 //定义css、js源文件路径
 const source = {
@@ -60,6 +61,11 @@ gulp.task('less', () => {
     // .pipe(sourcemaps.init())
     .pipe(plumber()) // 防止报错中断task
     .pipe(less())
+    .pipe(autoprefixer({
+      browsers: ['last 100 versions','ie >= 8'],
+      cascade: true, //是否美化属性值 默认：true 像这样：
+      remove: true //是否去掉不必要的前缀 默认：true 
+    }))
     // .pipe(sourcemaps.write())
     .pipe(gulp.dest('./src/css'));
 });

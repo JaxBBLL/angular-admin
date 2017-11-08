@@ -21,41 +21,44 @@
 </head>
 
 <body>
-  <!-- <div id="app-header">
-    header
-  </div> -->
-  <div id="app-body">
-    <div style="float: left;">
-      <ul class="layui-nav layui-nav-tree" id="app-menu" data-menu="">
-        <li class="layui-nav-item layui-nav-itemed">
-          <a href="javascript:;">任务管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="#/user/add">发布任务</a></dd>
-            <dd><a href="#/user/list">任务列表</a></dd>
-          </dl>
-        </li>
-        <li class="layui-nav-item layui-nav-itemed">
-          <a href="javascript:;">工单</a>
-          <dl class="layui-nav-child">
-            <dd><a href="#/user/add">发布工单</a></dd>
-            <dd><a href="#/user/list">工单列表</a></dd>
-          </dl>
-        </li>
-      </ul>
+  <div id="app">
+    <!-- <div id="app-header">
+      header
+    </div> -->
+    <div id="app-body">
+      <div style="float: left;">
+        <ul class="layui-nav layui-nav-tree" id="app-menu" data-menu="">
+          <li class="layui-nav-item layui-nav-itemed">
+            <a href="javascript:;">任务管理</a>
+            <dl class="layui-nav-child">
+              <dd><a href="#/user/add">发布任务</a></dd>
+              <dd><a href="#/user/list">任务列表</a></dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item layui-nav-itemed">
+            <a href="javascript:;">工单</a>
+            <dl class="layui-nav-child">
+              <dd><a href="#/user/add">发布工单</a></dd>
+              <dd><a href="#/user/list">工单列表</a></dd>
+            </dl>
+          </li>
+        </ul>
+      </div>
+      <div style="overflow: hidden;">
+        <div id="router-view" style="padding:20px;"></div>
+      </div>
     </div>
-    <div style="overflow: hidden;">
-      <div id="router-view" style="padding:20px;"></div>
+    <div id="app-footer" class="clearfix">
+      <b>footer</b>
     </div>
   </div>
-  <div id="app-footer" class="clearfix">
-    <b>footer</b>
-  </div>
-  
 </body>
 <script src="./js/style.js"></script>
 <script>
+console.log(window.$config)
 if ($state.path() === '') {
   $state.go('/home')
 }
 </script>
+
 </html>

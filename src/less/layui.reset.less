@@ -1,8 +1,18 @@
 @import "./base.less";
+// router-active
 .layui-nav-tree .layui-nav-child a.router-active {
     color: @c!important;
 }
 
+// 菜单圆角
 .layui-nav {
     border-radius: 0;
+}
+
+// 按钮
+.layui-btn {
+    border-radius: 5px;
+    &.default {
+        background-color: @c;
+    }
 }

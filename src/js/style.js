@@ -11,28 +11,13 @@ window.$ = layui.$; // JQuery
 (function(window) {
   var menus = {
     'default': [{
-      title: '任务管理',
+      title: '基本元素',
       children: [{
-        path: '/user/add',
-        title: '任务发布'
+        path: '/base/button',
+        title: '按钮'
       }, {
-        path: '/user/list',
-        title: '任务管理'
-      }, {
-        path: '/user/list',
-        title: '任务管理'
-      }, {
-        path: '/user/list',
-        title: '任务管理'
-      }, {
-        path: '/user/list',
-        title: '任务管理'
-      }, {
-        path: '/user/list',
-        title: '任务管理'
-      }, {
-        path: '/user/list',
-        title: '任务管理'
+        path: '/base/form',
+        title: '表单'
       }]
     }]
   }
@@ -87,18 +72,17 @@ window.$ = layui.$; // JQuery
   }, {
     path: '/404',
     page: '/views/404.html',
-    title: '404',
-    parent: '设置'
+    title: '404'
   }, {
-    path: '/user/add',
-    page: '/views/user/add.html',
-    title: '添加',
-    parent: '设置'
+    path: '/base/button',
+    page: '/views/base/button.html',
+    title: '按钮',
+    parent: '基本元素'
   }, {
-    path: '/user/list',
-    page: '/views/user/list.html',
-    title: '列表',
-    parent: '设置'
+    path: '/base/form',
+    page: '/views/base/form.html',
+    title: '表单',
+    parent: '基本元素'
   }]
   window.$config.routers = routers;
 })(window)
@@ -141,7 +125,10 @@ window.$ = layui.$; // JQuery
   function renderPage(page, title, path) {
     return function() {
       document.title = title;
-      $('#router-view').load(page + '?v=' + window.$config.v)
+      $('#router-view').load(page + '?v=' + window.$config.v, function() {
+        console.log('path', path)
+        loadScript('/js'+ path+".js");
+      })
       $('#app-menu a').removeClass('router-active')
       $('#app-menu a[href="#' + path + '"]').addClass('router-active')
     }
@@ -173,6 +160,21 @@ window.$ = layui.$; // JQuery
       $('#app-menu').html(html)
       $('#app-menu').data('menu', name)
     }
+  }
+
+  function loadScript(url, callback) {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    console.log(script.attributes);
+    if (callback)
+      script.onload = script.onreadystatechange = function() {
+        if (script.readyState && script.readyState != 'loaded' && script.readyState != 'complete')
+          return;
+        script.onreadystatechange = script.onload = null;
+        callback();
+      };
+    script.src = url + '?v=' + window.$config.v;
+    document.getElementsByTagName('head')[0].appendChild(script);
   }
   window.$config.router = router;
 })(window, document)
