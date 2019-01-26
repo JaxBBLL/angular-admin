@@ -1,0 +1,25 @@
+<div>
+  <ul>
+    <li *ngFor="let item of list;let i=index">{{i +":"+item}}</li>
+  </ul>
+  <p *ngIf="isLogin">Login</p>
+  <ul>
+    <ng-container *ngFor="let item of scoreList">
+      <li *ngIf="item>=80">
+        {{item}}
+      </li>
+    </ng-container>
+  </ul>
+
+  <button (click)="handleClick()">
+    click
+  </button>
+
+  <br>
+
+  <input type="text" 
+  [(ngModel)]="inputValue"
+  (ngModelChange)="handleChange($event)" 
+  >
+  <span>{{inputValue}}</span>
+</div>
